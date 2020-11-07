@@ -185,4 +185,4 @@ function select_county(widget, county)
       .html(`COVID19 ${county}`);
 }
 
-var widget = new CoronaWidget('/static/covid19/sweden.json');
+var widget = new CoronaWidget('/data/sweden.json');
