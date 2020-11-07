@@ -55,16 +55,16 @@ export default class CoronaWidget
     //Create buttons
     this.buttons.push(
       new Button('#corona_widget', 0, 310, 333, 60,
-        'green', this.total_cases,'/static/covid19/fever.svg'));
+        'green', this.total_cases,'/img/fever.svg'));
     this.buttons.push(
       new Button('#corona_widget', 333, 310, 333, 60,
-        '#ffc202', this.total_cases,'/static/covid19/hospital-bed.svg'));
+        '#ffc202', this.total_cases,'/img/hospital-bed.svg'));
     this.buttons.push(
       new Button('#corona_widget', 666, 310, 333, 60,
-        'red', this.total_cases,'/static/covid19/death.svg'));
+        'red', this.total_cases,'/img/death.svg'));
 
     //Load data
-    d3.json('/static/covid19/cases_rolling_means.json').then( d => {
+    d3.json('/data/cases_rolling_means.json').then( d => {
       this.cases_data = d;
       var data = this.get_county_data('Sverige');
       this.timeseries.add(data, 'selected', this.unselected_color, 'Sverige');
@@ -72,7 +72,7 @@ export default class CoronaWidget
       this.timeseries.set_title('Nya fall');
     });
 
-    d3.json('/static/covid19/deaths.json').then(d => {
+    d3.json('/data/deaths.json').then(d => {
       var range = [...Array(Object.keys(d['date']).length).keys()];
       this.deaths_data = range.map(
         i => [new Date(d['date'][i]),
@@ -80,7 +80,7 @@ export default class CoronaWidget
       );
     });
 
-    d3.json('/static/covid19/icu.json').then(d => {
+    d3.json('/data/icu.json').then(d => {
       var range = [...Array(Object.keys(d['date']).length).keys()];
       this.icu_data = range.map(
         i => [new Date(d['date'][i]),
@@ -88,7 +88,7 @@ export default class CoronaWidget
       );
     });
 
-    d3.json('/static/covid19/totals.json').then(d => {
+    d3.json('/data/totals.json').then(d => {
       this.totals_data = d;
       this.total_cases = d['cases']['Sverige'];
       this.buttons[0].set_number(this.total_cases);
